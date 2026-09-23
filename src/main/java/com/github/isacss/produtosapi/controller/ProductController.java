@@ -2,7 +2,10 @@ package com.github.isacss.produtosapi.controller;
 
 import com.github.isacss.produtosapi.model.Product;
 import com.github.isacss.produtosapi.repository.ProductRepository;
+import org.springframework.boot.logging.log4j2.CorrelationIdConverter;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -43,5 +46,10 @@ public class ProductController {
     ){
         product.setId(id);
         productRepository.save(product);
+    }
+
+    @GetMapping
+    public List<Product> findProduct (@RequestParam("name") String name) {
+        return productRepository.findByName(name);
     }
 }
